@@ -28,6 +28,24 @@ class DB {
                     ]
                 );
             } catch (PDOException $e) {
+                // If default user failed with Access Denied (e.g. Linux MariaDB root unix_socket restriction), try crm_user fallback
+                if (str_contains($e->getMessage(), 'Access denied')) {
+                    try {
+                        self::$instance = new PDO(
+                            "mysql:host={$host};port={$port};dbname={$dbname};charset=utf8mb4",
+                            'crm_user',
+                            'crm_password',
+                            [
+                                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                                PDO::ATTR_EMULATE_PREPARES   => false,
+                            ]
+                        );
+                        return self::$instance;
+                    } catch (PDOException $fallbackErr) {
+                        // Fall through to report original error
+                    }
+                }
                 http_response_code(500);
                 die("Database Connection Error: " . $e->getMessage());
             }

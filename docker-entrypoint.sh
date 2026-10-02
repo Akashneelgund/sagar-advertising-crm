@@ -34,6 +34,18 @@ else
     echo "Ensuring database 'sagar_advertising_crm' exists..."
     mysql -u root -e "CREATE DATABASE IF NOT EXISTS \`sagar_advertising_crm\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
 
+    echo "Configuring database user permissions..."
+    mysql -u root -e "
+    CREATE USER IF NOT EXISTS 'crm_user'@'%' IDENTIFIED BY 'crm_password';
+    GRANT ALL PRIVILEGES ON *.* TO 'crm_user'@'%' WITH GRANT OPTION;
+    CREATE USER IF NOT EXISTS 'crm_user'@'localhost' IDENTIFIED BY 'crm_password';
+    GRANT ALL PRIVILEGES ON *.* TO 'crm_user'@'localhost' WITH GRANT OPTION;
+    CREATE USER IF NOT EXISTS 'crm_user'@'127.0.0.1' IDENTIFIED BY 'crm_password';
+    GRANT ALL PRIVILEGES ON *.* TO 'crm_user'@'127.0.0.1' WITH GRANT OPTION;
+    GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
+    FLUSH PRIVILEGES;
+    " 2>/dev/null || true
+
     TABLE_COUNT=$(mysql -u root -N -s -e "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = 'sagar_advertising_crm';" 2>/dev/null || echo 0)
     if [ "$TABLE_COUNT" -eq 0 ]; then
         echo "Importing initial database schema & seed data from DATABASE_SETUP.sql..."

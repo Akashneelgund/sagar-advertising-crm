@@ -11,3 +11,11 @@ services:
         value: production
       - key: APP_URL
         fromHost: true
+      - key: DB_HOST
+        value: 127.0.0.1
+      - key: DB_USER
+        value: crm_user
+      - key: DB_PASS
+        value: crm_password
+      - key: DB_NAME
+        value: sagar_advertising_crm
