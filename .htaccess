@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Block access to hidden files and storage backups
+    RewriteRule ^(\.git|\.env|composer\.|storage/backups) - [F,L]
+
+    # If the requested file or directory exists, serve directly
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Route all other URLs to index.php
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>

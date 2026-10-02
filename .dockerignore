@@ -1,0 +1,14 @@
+.git
+.github
+*.log
+storage/mail_logs/*
+!storage/mail_logs/.gitkeep
+storage/pdf/*
+!storage/pdf/.gitkeep
+storage/backups/*
+!storage/backups/.gitkeep
+uploads/*
+!uploads/.gitkeep
+cred_*.txt
+c_*.txt
+cookie*.txt

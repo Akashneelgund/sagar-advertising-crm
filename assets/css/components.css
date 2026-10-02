@@ -1,0 +1,525 @@
+/**
+ * Sagar Advertising CRM - Specialized UI Components
+ * Split-screen quotation builder, dynamic line items, live A4 preview, data tables, import wizard
+ */
+
+/* Modern Data Tables */
+.table-brand-wrap {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--brand-border);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.table-responsive {
+    -webkit-overflow-scrolling: touch;
+}
+
+.table-brand {
+    width: 100%;
+    margin-bottom: 0;
+    vertical-align: middle;
+    border-color: var(--brand-border);
+}
+
+.table-brand thead th {
+    background-color: #F8FAFC;
+    color: #475569;
+    font-size: 11.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--brand-border);
+    white-space: nowrap;
+}
+
+.table-brand tbody td {
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--brand-text-main);
+    border-bottom: 1px solid var(--brand-border);
+}
+
+@media (max-width: 768px) {
+    .table-brand thead th {
+        padding: 10px 12px;
+        font-size: 11px;
+    }
+    .table-brand tbody td {
+        padding: 10px 12px;
+        font-size: 12.5px;
+    }
+    .table-brand .btn-group {
+        display: inline-flex;
+        flex-wrap: nowrap;
+    }
+}
+
+.table-brand tbody tr:hover td {
+    background-color: #FAFCFE;
+}
+
+.table-brand tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Split-Screen Quotation Builder */
+.builder-layout {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    min-height: calc(100vh - var(--topbar-height) - 48px);
+}
+
+.builder-editor-pane {
+    flex: 1.1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-bottom: 40px;
+    min-width: 0;
+}
+
+.builder-editor-pane::-webkit-scrollbar {
+    width: 6px;
+}
+.builder-editor-pane::-webkit-scrollbar-thumb {
+    background: #CBD5E1;
+    border-radius: 4px;
+}
+
+.builder-preview-pane {
+    flex: 1;
+    position: sticky;
+    top: calc(var(--topbar-height) + 16px);
+    max-height: calc(100vh - var(--topbar-height) - 32px);
+    overflow-y: auto;
+    background: #525659;
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    display: flex;
+    justify-content: center;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.2);
+    min-width: 0;
+}
+
+.preview-paper {
+    background: #FFFFFF;
+    width: 100%;
+    max-width: 720px;
+    min-height: 1000px;
+    padding: 30px;
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-size: 12px;
+}
+
+/* Line Item Rows in Builder */
+.line-item-card {
+    background: #FAFBFC;
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-md);
+    padding: 14px;
+    margin-bottom: 12px;
+    position: relative;
+    transition: border-color 0.2s;
+}
+
+.line-item-card:hover {
+    border-color: #CBD5E1;
+}
+
+.line-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.item-index-badge {
+    background: var(--brand-dark);
+    color: #FFF;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.btn-remove-item {
+    color: #DC2626;
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 2px 6px;
+}
+.btn-remove-item:hover {
+    color: #991B1B;
+}
+
+/* Financial Summary Sidebar / Box */
+.totals-summary-card {
+    background: #FFFFFF;
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-md);
+    padding: 18px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 0;
+    font-size: 13.5px;
+    color: #475569;
+}
+
+.summary-row.total {
+    border-top: 2px solid var(--brand-dark);
+    margin-top: 10px;
+    padding-top: 12px;
+    font-size: 16px;
+    font-weight: 800;
+    color: var(--brand-dark);
+}
+
+.summary-row.total .grand-price {
+    color: var(--brand-orange);
+    font-size: 20px;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Activity Timeline */
+.activity-timeline {
+    position: relative;
+    padding-left: 28px;
+}
+
+.activity-timeline::before {
+    content: '';
+    position: absolute;
+    left: 8px;
+    top: 6px;
+    bottom: 6px;
+    width: 2px;
+    background: #E2E8F0;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 22px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+.timeline-dot {
+    position: absolute;
+    left: -28px;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: #FFF;
+    border: 3px solid var(--brand-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.timeline-content {
+    background: #F8FAFC;
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-md);
+    padding: 12px 16px;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #64748B;
+    margin-bottom: 4px;
+}
+
+.timeline-title {
+    font-weight: 700;
+    font-size: 13.5px;
+    color: var(--brand-dark);
+}
+
+/* Excel Wizard Steps */
+.wizard-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.wizard-steps::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: #E2E8F0;
+    z-index: 1;
+}
+
+.wizard-step {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFF;
+    padding: 0 10px;
+}
+
+.step-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: #F1F5F9;
+    color: #64748B;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-bottom: 8px;
+    border: 2px solid #CBD5E1;
+    transition: all 0.2s;
+}
+
+.wizard-step.active .step-circle {
+    background: var(--brand-orange);
+    color: #FFF;
+    border-color: var(--brand-orange);
+    box-shadow: 0 0 0 4px var(--brand-orange-glow);
+}
+
+.wizard-step.completed .step-circle {
+    background: #10B981;
+    color: #FFF;
+    border-color: #10B981;
+}
+
+.step-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748B;
+}
+
+.wizard-step.active .step-label {
+    color: var(--brand-dark);
+    font-weight: 700;
+}
+
+/* Search Dropdown Results */
+.search-results-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: #FFF;
+    border: 1px solid var(--brand-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    margin-top: 6px;
+    max-height: 360px;
+    overflow-y: auto;
+    z-index: 1050;
+    display: none;
+}
+
+.search-result-item {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--brand-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.15s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.search-result-item:hover {
+    background: #F8FAFC;
+}
+
+/* Mobile Builder View Switcher */
+.builder-mobile-switcher {
+    display: none;
+    margin-bottom: 16px;
+    background: #E2E8F0;
+    border-radius: var(--radius-md);
+    padding: 4px;
+}
+
+.builder-switcher-btn {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 9px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    color: #64748B;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.builder-switcher-btn.active {
+    background: #FFFFFF;
+    color: var(--brand-dark);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive builder layout */
+@media (max-width: 1199.98px) {
+    .builder-layout {
+        flex-direction: column;
+        height: auto;
+        overflow: visible;
+        gap: 16px;
+    }
+
+    .builder-mobile-switcher {
+        display: flex;
+    }
+
+    .builder-editor-pane, .builder-preview-pane {
+        flex: none;
+        width: 100%;
+    }
+
+    /* On mobile / tablet, hide preview unless active in switcher */
+    .builder-preview-pane {
+        display: none !important;
+        position: static;
+        max-height: none;
+        padding: 16px 8px;
+        overflow-x: auto;
+    }
+
+    .builder-preview-pane.mobile-active {
+        display: flex !important;
+    }
+
+    .builder-editor-pane.mobile-hidden {
+        display: none !important;
+    }
+
+    .preview-paper {
+        padding: 20px 14px;
+        min-height: auto;
+        box-shadow: var(--shadow-md);
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Settings horizontal tab navigation */
+    #settingsTabs {
+        flex-direction: row !important;
+        overflow-x: auto;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        padding: 6px !important;
+        gap: 6px;
+        margin-bottom: 16px;
+        background: #F1F5F9;
+    }
+
+    #settingsTabs .list-group-item {
+        white-space: nowrap;
+        padding: 8px 14px !important;
+        font-size: 12.5px;
+        border: 1px solid var(--brand-border) !important;
+        border-radius: var(--radius-sm) !important;
+        flex-shrink: 0;
+        background: #FFFFFF;
+    }
+
+    #settingsTabs .list-group-item.active {
+        background: var(--brand-dark) !important;
+        color: #FFFFFF !important;
+        border-color: var(--brand-dark) !important;
+    }
+
+    #settingsTabs .list-group-item.active i {
+        color: var(--brand-orange) !important;
+    }
+
+    /* Summary Card */
+    .totals-summary-card {
+        padding: 14px 12px;
+    }
+
+    .summary-row {
+        font-size: 13px;
+        padding: 4px 0;
+    }
+
+    .summary-row.total {
+        font-size: 14px;
+        margin-top: 8px;
+        padding-top: 10px;
+    }
+
+    .summary-row.total .grand-price {
+        font-size: 18px;
+    }
+
+    /* Line item card spacing */
+    .line-item-card {
+        padding: 12px 10px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Excel Wizard on small screens */
+    .wizard-steps::before {
+        left: 20px;
+        right: 20px;
+        top: 14px;
+    }
+
+    .step-circle {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+
+    .step-label {
+        font-size: 10.5px;
+    }
+
+    .summary-row {
+        flex-wrap: wrap;
+        gap: 2px;
+        font-size: 12px;
+    }
+
+    .timeline-content {
+        padding: 10px 12px;
+    }
+
+    /* Table within preview sheet */
+    .preview-paper table {
+        font-size: 10px;
+    }
+
+    .preview-paper table th, .preview-paper table td {
+        padding: 4px 6px;
+    }
+}

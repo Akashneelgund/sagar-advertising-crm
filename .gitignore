@@ -1,0 +1,13 @@
+.env
+storage/backups/*
+!storage/backups/.gitkeep
+storage/mail_logs/*
+!storage/mail_logs/.gitkeep
+storage/pdf/*
+!storage/pdf/.gitkeep
+uploads/*
+!uploads/.gitkeep
+*.log
+cred_*.txt
+c_*.txt
+cookie*.txt

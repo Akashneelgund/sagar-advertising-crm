@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: sagar-advertising-crm
+    runtime: docker
+    plan: free
+    region: oregon
+    branch: main
+    healthCheckPath: /login
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_URL
+        fromHost: true
